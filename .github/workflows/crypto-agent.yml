@@ -3,10 +3,38 @@ name: Crypto AI Agent
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "0 */6 * * *"
+
+permissions:
+  contents: read
 
 jobs:
-  test:
+  crypto-analysis:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Test workflow
-        run: echo "Crypto Agent workflow is working!"
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Crypto Agent
+        run: python main.py
+
+      - name: Upload Analysis Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: crypto-market-reports
+          path: reports/
+          if-no-files-found: warn
+          retention-days: 30
