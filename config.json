@@ -1,0 +1,65 @@
+{
+  "universe": {
+    "mode": "top_cmc",
+    "limit": 50,
+    "symbols": [
+      "BTC",
+      "ETH",
+      "BNB",
+      "SOL",
+      "XRP"
+    ],
+    "exclude_symbols": [
+      "USDT",
+      "USDC",
+      "DAI",
+      "FDUSD",
+      "TUSD",
+      "USDE",
+      "USDS",
+      "USTC",
+      "UST"
+    ]
+  },
+  "markets": [
+    "SPOT",
+    "FUTURES"
+  ],
+  "timeframes": [
+    "5m",
+    "15m",
+    "1h",
+    "4h"
+  ],
+  "scanner": {
+    "candle_limit": 100,
+    "min_strategy_votes": 2,
+    "request_pause_seconds": 0.08
+  },
+  "strategies": {
+    "ema_rsi_macd": {
+      "enabled": true,
+      "long_rsi_min": 52,
+      "short_rsi_max": 48
+    },
+    "breakout_volume": {
+      "enabled": true,
+      "volume_multiplier": 1.5
+    },
+    "bollinger_rsi": {
+      "enabled": false,
+      "oversold_rsi": 30,
+      "overbought_rsi": 70
+    },
+    "vwap_momentum": {
+      "enabled": false
+    }
+  },
+  "risk": {
+    "capital_usdt": 250,
+    "risk_per_trade_pct": 1.0,
+    "atr_stop_multiplier": 1.5,
+    "risk_reward_ratio": 2.0,
+    "planning_max_leverage": 1.0
+  }
+}
